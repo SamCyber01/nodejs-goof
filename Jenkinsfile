@@ -146,7 +146,7 @@ pipeline {
                     args '--user root --network host'
                 }
             }            
-            Steps {
+            steps {
                 withCredentials([sshUserPrivateKey(credentialsId: "Deployment_SSH_Key", keyFileVariable: 'keyfile')]) {
                     sh 'ssh -i ${keyfile} -o StrictHostKeyChecking=no telsec@192.168.1.129 "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"'
                     sh 'ssh -i ${keyfile} -o StrictHostKeyChecking=no telsec@192.168.1.129 docker pull xenjutsu/nodejsgoof:0.1'
